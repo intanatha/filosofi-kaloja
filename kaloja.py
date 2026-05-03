@@ -4,17 +4,14 @@ import os
 # 1. KONFIGURASI HALAMAN
 st.set_page_config(page_title="Filosofi Kaloja", layout="centered")
 
-# 2. GPS OTOMATIS (Mencari lokasi folder di Cloud)
+# 2. GPS OTOMATIS (Mencari lokasi folder di laptop maupun di Cloud)
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 3. FUNGSI TAMPILKAN GAMBAR
-def tampilkan_gambar(nama_file, caption=None, tipe="besar"):
+def tampilkan_gambar(nama_file, caption=None, full_width=True):
     path_lengkap = os.path.join(base_dir, nama_file)
     if os.path.exists(path_lengkap):
-        if tipe == "besar":
-            st.image(path_lengkap, caption=caption, use_container_width=True)
-        else:
-            st.image(path_lengkap, caption=caption, use_container_width=True)
+        st.image(path_lengkap, caption=caption, use_container_width=full_width)
     else:
         st.error(f"File '{nama_file}' tidak ditemukan.")
 
@@ -23,12 +20,12 @@ def tampilkan_gambar(nama_file, caption=None, tipe="besar"):
 st.title("Sugeng Rawuh! ✨")
 
 # Banner Utama
-tampilkan_gambar("scroll.jpg", tipe="besar")
+tampilkan_gambar("scroll.jpg")
 
 st.markdown("---")
 
 # Filosofi Sinom Parijotho
-tampilkan_gambar("sinom.jpg", tipe="besar")
+tampilkan_gambar("sinom.jpg")
 st.subheader("Batik Sinom Parijotho Salak")
 st.write("""
 Batik Sinom Parijotho Salak adalah batik khas Kabupaten Sleman yang melambangkan **kemakmuran, kesejahteraan, dan harapan masyarakat yang terayomi**. 
@@ -39,7 +36,7 @@ Motif ini menggabungkan tanaman **Parijotho** (simbol kesuburan lereng Merapi) d
 st.write("") 
 
 # Filosofi Kembang Waru
-tampilkan_gambar("kembangwaru.jpg", tipe="besar")
+tampilkan_gambar("kembangwaru.jpg")
 st.subheader("Roti Kembang Waru")
 st.write("""
 **Kembang Waru** merupakan roti khas Kotagede yang memiliki sejarah panjang karena dipercaya sebagai warisan kerajaan Mataram Islam. 
@@ -57,12 +54,20 @@ Di balik bentuknya yang cantik, delapan sisinya memiliki makna **delapan laku se
 
 st.markdown("---")
 
-# Koleksi Angka Aksara Jawa
+# Koleksi Angka Aksara Jawa (Versi HP Friendly)
 st.header("🔢 Koleksi Angka Aksara Jawa")
-cols = st.columns(5)
-for i in range(10):
-    with cols[i % 5]:
-        tampilkan_gambar(f"angka{i}.jpeg", caption=f"Angka {i}", tipe="kecil")
+
+# Baris Pertama (0-4)
+kolom_baris1 = st.columns(5)
+for i in range(5):
+    with kolom_baris1[i]:
+        tampilkan_gambar(f"angka{i}.jpeg", caption=f"Angka {i}")
+
+# Baris Kedua (5-9)
+kolom_baris2 = st.columns(5)
+for i in range(5, 10):
+    with kolom_baris2[i-5]:
+        tampilkan_gambar(f"angka{i}.jpeg", caption=f"Angka {i}")
 
 st.write("")
 
@@ -82,4 +87,4 @@ with st.expander("📖 Baca Selengkapnya: Penulisan Angka 10 ke Atas"):
     """)
 
 st.write("---")
-st.caption("© 2026 Kaloja - Antekriya")
+st.caption("© 2026 Kaloja - Materi Filosofi & Aksara Jawa")
