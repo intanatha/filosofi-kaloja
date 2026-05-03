@@ -4,7 +4,7 @@ import os
 # 1. KONFIGURASI HALAMAN
 st.set_page_config(page_title="Filosofi Kaloja", layout="centered")
 
-# 2. GPS OTOMATIS (Mencari lokasi folder D:\intan SMA\Fiksi_Kaloja)
+# 2. GPS OTOMATIS (Mencari lokasi folder di Cloud)
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 3. FUNGSI TAMPILKAN GAMBAR
@@ -12,10 +12,8 @@ def tampilkan_gambar(nama_file, caption=None, tipe="besar"):
     path_lengkap = os.path.join(base_dir, nama_file)
     if os.path.exists(path_lengkap):
         if tipe == "besar":
-            # Untuk Banner, Sinom, dan Kembang Waru (Lebar Penuh)
             st.image(path_lengkap, caption=caption, use_container_width=True)
         else:
-            # Untuk Angka (Ukuran Kecil & Pas di Kolom)
             st.image(path_lengkap, caption=caption, use_container_width=True)
     else:
         st.error(f"File '{nama_file}' tidak ditemukan.")
@@ -24,45 +22,64 @@ def tampilkan_gambar(nama_file, caption=None, tipe="besar"):
 
 st.title("Sugeng Rawuh! ✨")
 
-# Banner Utama (Besar)
+# Banner Utama
 tampilkan_gambar("scroll.jpg", tipe="besar")
 
 st.markdown("---")
 
-# Filosofi Sinom Parijotho (Besar)
+# Filosofi Sinom Parijotho
 tampilkan_gambar("sinom.jpg", tipe="besar")
-st.subheader("Sinom Parijotho")
+st.subheader("Batik Sinom Parijotho Salak")
 st.write("""
-Terinspirasi dari tanaman khas lereng Gunung Muria, Sinom Parijotho merupakan simbol kemakmuran dan keselarasan. 
-Nama **"Sinom"** melambangkan pertumbuhan daun muda, sementara Parijotho melambangkan anugerah alam yang bermanfaat. 
+Batik Sinom Parijotho Salak adalah batik khas Kabupaten Sleman yang melambangkan **kemakmuran, kesejahteraan, dan harapan masyarakat yang terayomi**. 
+
+Motif ini menggabungkan tanaman **Parijotho** (simbol kesuburan lereng Merapi) dengan **Salak Pondoh** (hasil bumi utama) dan motif **sinom** (daun muda), yang dimaknai sebagai energi pertumbuhan dan kesejahteraan warga.
 """)
 
 st.write("") 
 
-# Filosofi Kembang Waru (Besar)
+# Filosofi Kembang Waru
 tampilkan_gambar("kembangwaru.jpg", tipe="besar")
-st.subheader("Kembang Waru")
+st.subheader("Roti Kembang Waru")
 st.write("""
-Kembang waru merupakan roti khas Kotagede yang memiliki sejarah panjang sebagai warisan Kerajaan Mataram Islam. 
-Di balik bentuknya yang cantik, delapan sisinya memiliki makna **Asta Brata**.
+**Kembang Waru** merupakan roti khas Kotagede yang memiliki sejarah panjang karena dipercaya sebagai warisan kerajaan Mataram Islam. 
+
+Di balik bentuknya yang cantik, delapan sisinya memiliki makna **delapan laku seorang pemimpin (Asta Brata)** yang merupakan personifikasi dari delapan elemen unsur alam yakni:
+* ☀️ **Matahari**
+* 🌙 **Bulan**
+* ⭐ **Bintang**
+* ☁️ **Mega (Awan)**
+* 💧 **Tirta (Air)**
+* 🌱 **Kismo (Tanah)**
+* 🌊 **Samudra**
+* 🌬️ **Maruto (Angin)**
 """)
 
 st.markdown("---")
 
-# Koleksi Angka Aksara Jawa (Kecil & Berjejer)
+# Koleksi Angka Aksara Jawa
 st.header("🔢 Koleksi Angka Aksara Jawa")
-
-# Membuat grid 5 kolom
 cols = st.columns(5)
-
-# Looping angka 0-9 (Tipe "kecil" agar mengikuti lebar kolom saja)
 for i in range(10):
     with cols[i % 5]:
         tampilkan_gambar(f"angka{i}.jpeg", caption=f"Angka {i}", tipe="kecil")
 
-# Footer
 st.write("")
-st.info("💡 **Tips Menulis Angka 10+:** Sistem angka Jawa adalah desimal. Contoh: ꧇꧑꧐꧇")
+
+# Tips Penulisan Angka (Versi Lengkap)
+with st.expander("📖 Baca Selengkapnya: Penulisan Angka 10 ke Atas"):
+    st.write("""
+    Penulisan angka dalam aksara Jawa untuk bilangan 10 ke atas dilakukan dengan menggabungkan lambang angka dasar sesuai urutan nilainya, mirip dengan sistem penulisan angka modern. 
+    
+    Dalam penulisan tradisional Jawa, angka biasanya diapit tanda **pangkat pasanten** (“ : : ”) agar dapat dibedakan dari huruf aksara Jawa lainnya.
+    
+    **Contoh:**
+    * **10** = :꧑꧐: (Angka 1 dan 0)
+    * **11** = :꧑꧑: (Angka 1 dan 1)
+    * **12** = :꧑꧒: (Angka 1 dan 2)
+    * **25** = :꧒꧕: (Angka 2 dan 5)
+    * **100** = :꧑꧐꧐: (Angka 1, 0, dan 0)
+    """)
 
 st.write("---")
 st.caption("© 2026 Kaloja - Antekriya")
